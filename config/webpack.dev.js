@@ -18,6 +18,15 @@ module.exports = {
                 ]
             },
             {
+                test: /\.jsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                query: {
+                    cacheDirectory: true,
+                    presets: ['react']
+                }
+            },
+            {
                 test: /\.css$/,
                 use: ["style-loader","css-loader"]
             },
@@ -51,6 +60,7 @@ module.exports = {
         path: path.resolve(__dirname,"../dist"),
         publicPath: "/"
     },
+    devtool: "source-map",
     devServer: {
         contentBase: "dist",
         overlay: true,
