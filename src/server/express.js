@@ -10,12 +10,13 @@ const webpackDevMiddleware = require("webpack-dev-middleware")(compiler, config.
 
 server.use(webpackHotMiddleware);
 server.use(webpackDevMiddleware);
-
+const PORT = process.env.PORT || 8080;
 const staticMiddleware = express.static("dist");
 server.use(staticMiddleware);
+server.use('*/img',express.static("src/img"));
 server.use('*/styles',express.static("styles/css"));
-// server.use('*/vid',express.static('src/media/vid'));
-// server.use('*/font',express.static('src/fonts'))
-server.listen(8080, ()=>{
-    console.log("---- Server is running ----")
+server.use('*/vid',express.static('src/media/vid'));
+server.use('*/font',express.static('src/fonts'))
+server.listen(PORT, ()=>{
+    console.log(`---- Server is running at port ${PORT}----`)
 });
