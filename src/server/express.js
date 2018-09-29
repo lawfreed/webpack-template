@@ -3,6 +3,7 @@ import express from "express";
 
 const server = express();
 const webpack = require("webpack");
+// const config = require("../../config/webpack.dev.js");
 const config = require("../../config/webpack.prod.js");
 const compiler = webpack(config);
 const webpackHotMiddleware = require("webpack-hot-middleware")(compiler);
@@ -18,10 +19,11 @@ const expressStaticGzip = require("express-static-gzip");
         enableBrotli: true
     })
 );
-server.use('*/img',express.static("src/img"));
-server.use('*/styles',express.static("styles/css"));
-server.use('*/vid',express.static('src/media/vid'));
-server.use('*/font',express.static('src/fonts'))
-server.listen(PORT, ()=>{
+server.use('*/icon',express.static("../../dist/icon"));
+server.use('*/images',express.static("../../dist/images"));
+server.use('*/styles',express.static("../../dist/styles"));
+server.use('*/videos',express.static('../../dist/media/video'));
+server.use('*/font',express.static('../../dist/fonts'))
+server.listen(PORT, ()=> {
     console.log(`---- Server is running at port ${PORT}----`)
 });

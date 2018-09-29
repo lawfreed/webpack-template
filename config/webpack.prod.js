@@ -62,16 +62,27 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.md$/,
+                use: [
+                    {
+                        loader: "html-loader"
+                    },
+                    {
+                        loader: "markdown-loader"
+                    }
+                ]
             }
         ]
     },
     output: {
-        filename: "[name].js",
+        filename: "scripts/[name].js",
         path: path.resolve(__dirname,"../dist"),
         publicPath: "/"
     },
     plugins: [
-        new ExtractTextWebpackPlugin({ filename: "style.min.css" }),
+        new ExtractTextWebpackPlugin({ filename: "styles/style.min.css" }),
         new webpack.HotModuleReplacementPlugin(),
         new HTMLWebpackPlugin({ template: "./src/index.html" }),
         new webpack.DefinePlugin({
