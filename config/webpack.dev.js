@@ -1,14 +1,16 @@
 const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
 module.exports = {
     entry: {
         bundle: [
             "babel-runtime/regenerator",
             "babel-register",
             "webpack-hot-middleware/client?reload=true",
-            "./src/index.js"]
+            "./src/index.js"
+        ]
     },
     mode: "development",
     module: {
@@ -33,10 +35,14 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ExtractTextWebpackPlugin.extract({
-                    fallback: "style-loader",
-                    use: ["css-loader"]
-                })
+                use: [
+                    {
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "css-loader"
+                    }
+                ]
             },
             {
                 test: /\.html$/,
@@ -64,10 +70,7 @@ module.exports = {
                 test: /\.md$/,
                 use: [
                     {
-                        loader: "html-loader"
-                    },
-                    {
-                        loader: "markdown-loader"
+                        loader: "markdown-with-front-matter-loader"
                     }
                 ]
             }
@@ -84,8 +87,19 @@ module.exports = {
         overlay: true,
         hot: true
     },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    name: "vendor",
+                    chunks: "all",
+                    minChunks: 2
+                }
+            }
+        }
+    },
     plugins: [
-        new ExtractTextWebpackPlugin({ filename: "styles/style.min.css" }),
+        // new ExtractTextWebpackPlugin({ filename: "styles/style.min.css" }),
         new webpack.HotModuleReplacementPlugin(),
         new HTMLWebpackPlugin({ template: "./src/index.html" }),
         new webpack.DefinePlugin({
@@ -93,5 +107,8 @@ module.exports = {
                 NODE_ENV: JSON.stringify("development")
             }
         }),
+        new BundleAnalyzerPlugin({
+            generateStatsFile: true
+        })
     ]
 }

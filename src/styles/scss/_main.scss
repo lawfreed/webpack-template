@@ -10,6 +10,11 @@ body {
         font-family: sans-serif;
         color: white;
         text-shadow: 0 0 20px black;
+        .content {
+            h3, p {
+                text-align: center;
+            }
+        }
     }
     img {
         border-radius: 100%;

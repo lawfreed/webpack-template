@@ -1,3 +1,5 @@
-# Long ago in the Kingdom of Amalur
+---
+title: The Hero Journal
+---
 
-Our hero awakens.
+The All New Robin.

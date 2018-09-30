@@ -3,8 +3,8 @@ import express from "express";
 
 const server = express();
 const webpack = require("webpack");
-// const config = require("../../config/webpack.dev.js");
-const config = require("../../config/webpack.prod.js");
+const config = require("../../config/webpack.dev.js");
+// const config = require("../../config/webpack.prod.js");
 const compiler = webpack(config);
 const webpackHotMiddleware = require("webpack-hot-middleware")(compiler);
 const webpackDevMiddleware = require("webpack-dev-middleware")(compiler, config.devServer);

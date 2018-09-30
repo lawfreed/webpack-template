@@ -5,13 +5,15 @@ const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const BabelMinifyWebpackPlugin = require("babel-minify-webpack-plugin");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const BrotliWebpackPlugin = require("brotli-webpack-plugin");
+
 module.exports = {
     entry: {
         bundle: [
             "babel-runtime/regenerator",
             "babel-register",
             "webpack-hot-middleware/client?reload=true",
-            "./src/index.js"]
+            "./src/index.js"
+        ]
     },
     mode: "development",
     module: {
@@ -67,14 +69,21 @@ module.exports = {
                 test: /\.md$/,
                 use: [
                     {
-                        loader: "html-loader"
-                    },
-                    {
-                        loader: "markdown-loader"
+                        loader: "markdown-with-front-matter-loader"
                     }
                 ]
             }
         ]
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    name: "vendor",
+                    chunks: "all"
+                }
+            }
+        }
     },
     output: {
         filename: "scripts/[name].js",
@@ -94,6 +103,6 @@ module.exports = {
         new CompressionWebpackPlugin({
             algorithm: "gzip"
         }),
-        new BrotliWebpackPlugin()
+        new BrotliWebpackPlugin(),
     ]
 }
