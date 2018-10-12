@@ -8,7 +8,7 @@ const BrotliWebpackPlugin = require("brotli-webpack-plugin");
 
 module.exports = {
     entry: {
-        bundle: [
+        common: [
             "babel-runtime/regenerator",
             "babel-register",
             "webpack-hot-middleware/client?reload=true",
@@ -86,12 +86,12 @@ module.exports = {
         }
     },
     output: {
-        filename: "scripts/[name].js",
+        filename: "scripts/[name].bundle.js",
         path: path.resolve(__dirname,"../dist"),
         publicPath: "/"
     },
     plugins: [
-        new ExtractTextWebpackPlugin({ filename: "styles/style.min.css" }),
+        new ExtractTextWebpackPlugin({ filename: "styles/common.min.css" }),
         new webpack.HotModuleReplacementPlugin(),
         new HTMLWebpackPlugin({ template: "./src/index.html" }),
         new webpack.DefinePlugin({

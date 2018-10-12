@@ -6,9 +6,9 @@
   "scripts": {
     "serve": "nodemon --inspect --watch --config --watch src/server src/server/server.js",
     "start": "webpack-dev-server --config=config/webpack.dev.js",
-    "build:dev": "webpack --config=config/webpack.dev.js",
-    "build:prod": "webpack --config=config/webpack.prod.js",
-    "prods": "node src/server/server.js"
+    "prods": "node src/server/server.js",
+    "build:devs": "webpack --config=config/webpack.dev.js",
+    "build:prod": "webpack --config=config/webpack.prod.js"
   },
   "author": "Mark Manga",
   "license": "ISC",

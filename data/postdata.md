@@ -1,5 +1,5 @@
 ---
-title: The Hero Journal
+title: Webpack Template
 ---
 
-The All New Robin.
+Author: Mark Manga

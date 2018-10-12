@@ -1,11 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require("html-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
-        bundle: [
+        common: [
             "babel-runtime/regenerator",
             "babel-register",
             "webpack-hot-middleware/client?reload=true",
@@ -77,7 +77,7 @@ module.exports = {
         ]
     },
     output: {
-        filename: "scripts/[name].js",
+        filename: "scripts/[name].bundle.js",
         path: path.resolve(__dirname,"../dist"),
         publicPath: "/"
     },
@@ -107,8 +107,8 @@ module.exports = {
                 NODE_ENV: JSON.stringify("development")
             }
         }),
-        new BundleAnalyzerPlugin({
-            generateStatsFile: true
-        })
+        // new BundleAnalyzerPlugin({
+        //     generateStatsFile: true
+        // })
     ]
 }
